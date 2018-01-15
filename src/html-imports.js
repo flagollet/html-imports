@@ -186,6 +186,14 @@
             fail(resource);
           }
         };
+        request.onreadystatechange = function () {
+          if (request.readyState === 4) { // done
+            if (request.status !== 200) {
+              const resource = /** @type {string} */ (request.response || request.responseText);
+              fail(resource);
+            }
+          }
+        }
         request.send();
       }
     }
